@@ -1,5 +1,6 @@
 ---
 title: "Day 2 Activities: Aquatic Vertebrate Data"
+subtitle: "Data from: Aquatic Vertebrate Population Study in Mack Creek, Andrews Experimental Forest, 1987 to present"
 date: "15 August 2023"
 output: html
 execute: 

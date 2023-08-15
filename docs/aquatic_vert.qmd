@@ -1,0 +1,71 @@
+---
+title: "Day 2 Activities: Aquatic Vertebrate Data"
+date: "15 August 2023"
+output: html
+execute: 
+  warning: false
+---
+
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+```{r}
+mack_verts <- read_csv(here("data", "AS00601.csv")) %>%
+  clean_names()
+```
+
+```{r}
+mc_wt_5 <- mack_verts$weight[5]
+mc_wt_5
+
+mc_length_8_20 <- mack_verts$length1[8:20]
+mc_length_8_20
+
+mc_dates <- mack_verts$sampledate
+head(mc_dates)
+```
+
+#### Salamander subset
+
+```{r}
+mc_salamanders <- mack_verts %>%
+  filter(species == "DITE")
+head(mc_salamanders)
+```
+
+```{r}
+mc_salamander_plot <- ggplot(mc_salamanders, aes(x = length1, y = weight)) +
+  geom_point(alpha = 0.5, color = "#98afc5") +
+  labs(x = "snout-vent length (mm)", y = "weight (g)", title = "Dicamptodon tenebrosus snout-vent length vs weight",
+       caption = "https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-and.4027.14") +
+  theme_linedraw()
+
+mc_salamander_plot
+```
+
+```{r}
+ggsave(filename = here("figs", "salamander_size.png"), plot = mc_salamander_plot)
+```
+
+#### Trout Subset
+
+```{r}
+mc_trout <- mack_verts %>%
+  filter(species == "ONCL") %>%
+  ggplot(., aes(x = length1, y = weight, color = reach)) +
+    geom_point(alpha = 0.5) +
+    facet_wrap(~reach) +
+    labs(x = "snout-vent length (mm)", y = "weight (g)", title = "Cutthroat Trout snout-vent length vs weight", caption = "https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-and.4027.14", color = "Reach") +
+  theme_linedraw() +
+  scale_color_manual(values = c("#98afc5", "#95e9f6", "#2759b0"))
+
+mc_trout
+```
+
+```{r}
+ggsave(filename = here("figs", "mc_trout.png"), plot = mc_trout)
+```
+

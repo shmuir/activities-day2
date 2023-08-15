@@ -1,0 +1,54 @@
+---
+title: "Day 2 Activities: Creating Data"
+date: "15 August 2023"
+output: html
+execute: 
+  warning: false
+---
+
+## Creating some data in vectors
+
+```{r}
+vec_1 <- c(2, 5, 9, 10, 8, 12, 1, 0)
+
+class(vec_1)
+typeof(vec_1)
+
+vec_1_e3 <- vec_1[3]
+vec_1_e1 <- vec_1[1]
+vec_1_e5to7 <- vec_1[5:7]
+
+vec_1_chr <- as.character(vec_1)
+vec_1_chr
+```
+
+```{r}
+vec_2 <- c(town = "Santa Barbara", location = "Rincon", swell = "south")
+
+class(vec_2)
+length(vec_2)
+
+vec_2_e2 <- vec_2[2]
+vec_2_e2
+```
+
+## Creating a data frame
+
+```{r}
+df_1 <- data.frame(region = c("A", "B", "C", "D"),
+                   species = c("otter", "great white", "sea lion", "gray whale"),
+                   count = c(12, 2, 36, 6))
+
+tibble::as_tibble(df_1)
+
+class(df_1)
+class(df_1$species)
+
+max_count <- max(df_1$count)
+max_count
+```
+
+
+
+
+
